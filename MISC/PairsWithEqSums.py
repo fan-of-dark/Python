@@ -30,30 +30,33 @@ Output :
 Note : If no solution is possible, return an empty list.
 """
 
-def calc(A,A1,C1):
-    doop = A.copy()
-    doop1 = doop[A1+1:]
-    doop2 = doop[C1+1:]
-    for j in range(len(doop1)):
-        B1 = doop1[j]
-        for k in range(len(doop2)):
-            D1 = doop2[k]
-            if D1 != B1 and  A[A1]+B1 == A[C1] +D1:
-                return (A1,A.index(doop1[j]),C1,A.index(doop2[k]))
+def check(lst):
+    return (lst[0] < lst[2] and lst[1] != lst[3] and lst[1] !=lst[2] and len(set(lst))== 4 and lst[1] > lst[0] and lst[3] > lst[2])
 
 class Solution:
     def equal(self, A):
-        # write your method here
+        
+        dic = {}
         lst = []
+        Flag = True
         for i in range(len(A)-1):
             for j in range(i+1,len(A)):
-                tup = calc(A,i,j)
-                if tup != None:
-                    lst.append(tup)
-            
+                add = A[i]+A[j]
+                if add in dic:
+                    dic[add].append(i)
+                    dic[add].append(j)
+                    lst.append(dic[add])
+                else:
+                    dic[add] = [i,j]
+        lst =  list(filter(lambda x:len(x) >= 4,lst))
+        lst = [i[:4] for i in lst]
+        lst = list(filter(check,lst))
         if len(lst) != 0:
             return min(lst)
         else:
             return []
+
+            
+                        
             
                         
