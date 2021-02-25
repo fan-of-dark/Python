@@ -1,0 +1,25 @@
+ Approach:
+ A trailing zero is always produced by prime factors 2 and 5,We can easily observe that the number of 2s in prime factors is always more than or equal to the number of 5s.
+ so, its enough to power of 5 in prime factorization of given number.
+ for ex: for 100!, [5,10,15,20,25.......100] will produce zeroes
+ we can observe multiples of 5  produce 1 zero,multiples of 25 will produce an extra zero(besides 5),multiples of 125 will produce 1 extra zeroes(besides 5 ,25) ... so on.
+ so, we need to find number of 5 multiples,25 multiples, 125 multiples so on.....in [1,N](inclusive)
+ CONCEPT: Number1// Number2 is equal to number of Multiples of Number2 in [1,Number1]
+ 
+ so solution is n//5 + n//25 + n//125 + ......
+ 
+ Solution:
+ for example n = 100
+ initialize count to 0
+ iteration-1:
+ find number of multiples of 5 in [1,100] i.e 100//5 and update n --> 20 and count-->20
+ iteration-2:
+ find number of multiples of 5 in [1,20] which is equal to number of 25 multiples in [5,100]
+ update n--> 4,count --> 24
+ iteration-3:
+ find number of multiples of 5 in [1,4] which is equal to multiples of 125 in [25,100], so loop breaks.
+ 
+ print the count.
+ 
+ reference: https://www.geeksforgeeks.org/count-trailing-zeroes-factorial-number/
+ 
