@@ -1,23 +1,42 @@
 class Solution:
     def equal(self,A):
         dic = {}
+        #to store best pair
         lst = []
+        
+        #iterating through all indeces couple and storing their sum in dictionary along with indexes
         for i in range(len(A)-1):
             for j in range(i+1,len(A)):
+                
+                #store the sum
                 add = A[i]+A[j]
+                
+                #if sum already in dictionary
                 if add in dic:
+                    
+                    #as indeces must be unique, we do this only if they are unique pair
                     if (i not in dic[add] and j not in dic[add]):
+                        
+                        #if already 2 pairs are there, optimize 2nd one to best
                         if len(dic[add]) ==4:
                             if (i < dic[add][-2] and j < dic[add][-1]):
                                 dic[add][-2] = j
                                 dic[add][-1] = i
+                                
+                        #if only one pair is there , add second        
                         else:
                             dic[add].append(i)
                             dic[add].append(j)
+                            
+                        #optimize list for best possible minimum index
                         if lst == [] or lst > dic[add]:
                             lst = dic[add]
+                            
+                # if sum not in dictionary            
                 else:
                     dic[add] = [i,j]
+                    
+        #if pair found,return it             
         if len(lst) != 0:
             return lst
         else:
