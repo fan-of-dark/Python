@@ -1,0 +1,29 @@
+class Solution:
+    def equal(self,A):
+        dic = {}
+        lst = []
+        for i in range(len(A)-1):
+            for j in range(i+1,len(A)):
+                add = A[i]+A[j]
+                if add in dic:
+                    if (i not in dic[add] and j not in dic[add]):
+                        if len(dic[add]) ==4:
+                            if (i < dic[add][-2] and j < dic[add][-1]):
+                                dic[add][-2] = j
+                                dic[add][-1] = i
+                        else:
+                            dic[add].append(i)
+                            dic[add].append(j)
+                        if lst == [] or lst > dic[add]:
+                            lst = dic[add]
+                else:
+                    dic[add] = [i,j]
+        if len(lst) != 0:
+            return lst
+        else:
+            return []
+    
+        
+
+            
+                        
